@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { v4 as uuidv4 } from "uuid"
+
 import Header from "./componets/Header"
 import FeedbackList from "./componets/FeedbackList"
 //Todo manage global State
@@ -13,16 +15,20 @@ function App() {
     if (window.confirm("Are you sure you want to delete")) {
       setFeedback(feedback.filter((mapItem) => mapItem.id !== id))
     }
-  }
-  // Set feedback to the new array minus the feedback we are reading, setFeedback() will pass and replace the exisitng feedBack value. Window will confirm. The feedback is set with a new array and fliter() through that calls a function, loops through that can condicion something out the one we deleted.
+  } // Set feedback to the new array minus the feedback we are reading, setFeedback() will pass and replace the exisitng feedBack value. Window will confirm. The feedback is set with a new array and fliter() through that calls a function, loops through that can condicion something out the one we deleted.
 
   // For each feedback filter where mapItem.id is not equal to the mapId that was passed in.
+  const addFeedback = (newFeedback) => {
+    newFeedback.id = uuidv4()
+    //uuid is a npm that will generate unique ids
+    setFeedback([newFeedback, ...feedback])
+  }
 
   return (
     <>
       <Header />
       <div className="Container">
-        <FeedbackForm feedback={feedback} />
+        <FeedbackForm handleAdd={addFeedback} />
         <FeedbackStats feedback={feedback} />
         <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
       </div>
@@ -30,8 +36,3 @@ function App() {
   )
 }
 export default App
-
-//Todo Create Feedback list of items that holds off the feedback items
-// Create feedback list and item display
-
-//State with Funtional Compents app and gobal level state

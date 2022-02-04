@@ -4,14 +4,14 @@ import { useState } from "react" //Hook
 import Card from "./shared/Card"
 import Button from "./shared/Button"
 
-function FeedbackForm() {
+function FeedbackForm({ handleAdd }) {
   //@Todo Realtime validation
   //button will be disabled until 10 chars are typed
   const [btnDisabled, setBtnDisabled] = useState(true)
-  const [rating, setRating] = useState(10)
+  const [rating, setRating] = useState()
   const [message, setMessage] = useState("")
-
   const [text, setText] = useState("")
+
   const handleTextChange = (e) => {
     if (text === "") {
       setBtnDisabled(true)
@@ -26,11 +26,24 @@ function FeedbackForm() {
     setText(e.target.value)
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (text.trim().length > 10) {
+      const newFeedback = {
+        text,
+        rating,
+      }
+      handleAdd(newFeedback)
+
+      setText("")
+    }
+  }
+  
   return (
     <Card>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2>Rate your service with us?</h2>
-        <RatingSelect select={(rating) => console.log(rating)} />
+        <RatingSelect select={(rating) => setRating(rating)} />
         <div className="input-group">
           <input
             onChange={handleTextChange}
