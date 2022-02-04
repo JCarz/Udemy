@@ -3,6 +3,8 @@ import Header from "./componets/Header"
 import FeedbackList from "./componets/FeedbackList"
 //Todo manage global State
 import FeedbackData from "./data/FeedbackData"
+import FeedbackStats from "./componets/FeedbackStats"
+import FeedbackForm from "./componets/FeedbackForm"
 function App() {
   const [feedback, setFeedback] = useState(FeedbackData)
   // FeedbackData holds 3 states id,rating and text
@@ -20,6 +22,8 @@ function App() {
     <>
       <Header />
       <div className="Container">
+        <FeedbackForm feedback={feedback} />
+        <FeedbackStats feedback={feedback} />
         <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
       </div>
     </>
