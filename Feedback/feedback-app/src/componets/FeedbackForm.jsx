@@ -61,9 +61,9 @@ function FeedbackForm({ handleAdd }) {
     </Card>
   )
 }
-
-export default FeedbackForm
 {
   /*Component level state is a instace of a React Component class it is an object of a set of observable properties that control the behavior of a component therefore each imput in the form has its own state */
   /*setText is what is updated. What is inputed in the form will be updated through the onChange eventHandler, you need to get whatever is typed in: console.log(e.target.value)   will get what is typed in. This needs to be set in the piece of state @text */
 }
+export default FeedbackForm
+
