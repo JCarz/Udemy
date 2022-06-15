@@ -1,12 +1,16 @@
 import React from "react"
-import PropTypes from "prop-types"
+import { useContext } from "react"
+import FeedbackContext from "../context/FeedbackContext"
 
-function FeedbackStats({ feedback }) {
-  //calculate Ratings avg . High Order array method
-  //Higher order functions are functions that operate on other functions, either by receiving them as arguments or by returning them. It is a function that accepts a function as a parameter or returns a function as the output.
-  //Accumulator is what collects the average tha accepts numbers and stores them
+function FeedbackStats() {
+  const { feedback } = useContext(FeedbackContext)
+  //Uses the feedback property from the FeedbackContext to get the feedback array
 
-  //Take sum divide the feedback ratings(items there are)
+  // calculate Ratings avg . High Order array method
+  // Higher order functions are functions that operate on other functions, either by receiving them as arguments or by returning them. It is a function that accepts a function as a parameter or returns a function as the output.
+  // Accumulator is what collects the average tha accepts numbers and stores them
+
+  // Take sum divide the feedback ratings(items there are)
   let average =
     feedback.reduce((acaccumulator, current) => {
       return acaccumulator + current.rating
@@ -23,10 +27,6 @@ function FeedbackStats({ feedback }) {
       <h4>{isNaN(average) ? 0 : average}</h4>
     </div>
   )
-}
-
-FeedbackStats.protoTypes = {
-  feedback: PropTypes.array.isRequired,
 }
 
 export default FeedbackStats

@@ -1,12 +1,12 @@
 import { useState } from "react"
 import { v4 as uuidv4 } from "uuid"
-
 import Header from "./componets/Header"
 import FeedbackList from "./componets/FeedbackList"
-//Todo manage global State
 import FeedbackData from "./data/FeedbackData"
 import FeedbackStats from "./componets/FeedbackStats"
 import FeedbackForm from "./componets/FeedbackForm"
+import { FeedbackProvider } from "./context/FeedbackContext"
+
 function App() {
   const [feedback, setFeedback] = useState(FeedbackData)
   // FeedbackData holds 3 states id,rating and text
@@ -25,14 +25,14 @@ function App() {
   }
 
   return (
-    <>
+    <FeedbackProvider>
       <Header />
       <div className="Container">
         <FeedbackForm handleAdd={addFeedback} />
-        <FeedbackStats feedback={feedback} />
-        <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
+        <FeedbackStats />
+        <FeedbackList handleDelete={deleteFeedback} />
       </div>
-    </>
+    </FeedbackProvider>
   )
 }
 export default App
